@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Signup Page</title>
+	<style>
+		h2 {
+			color: #1fa0f1;
+			text-align: center;
+		}
+
+		body {
+			font-family: Arial, sans-serif;
+		}
+
+		form {
+			border: 1px solid #ccc;
+			padding: 20px;
+			width: 400px;
+			margin: 0 auto;
+		}
+
+		label {
+			display: block;
+			margin-bottom: 10px;
+		}
+
+		input[type=text],
+		input[type=password] {
+			padding: 8px;
+			width: 100%;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			box-sizing: border-box;
+			margin-bottom: 10px;
+		}
+
+		button[type=submit] {
+			background-color: #2d1ce2;
+			color: white;
+			padding: 8px 10px;
+			border: none;
+			border-radius: 8px;
+			cursor: pointer;
+			float: right;
+		}
+
+		button[type=submit]:hover {
+			background-color: #19e13a;
+		}
+
+		.error {
+			color: red;
+			font-size: 12px;
+			margin-top: 5px;
+		}
+	</style>
+</head>
+
+<body>
+	<form>
+		<h2>SignUp</h2>
+		<label for="username">Username:</label>
+		<input type="text" id="username" name="username" required>
+		<label for="password">Password:</label>
+		<input type="password" id="password" name="password" required>
+		<label for="confirm_password">Confirm Password:</label>
+		<input type="password" id="confirm_password" name="confirm_password" required>
+		<button type="submit">SUBMIT</button>
+		<div id="errors"></div>
+	</form>
+
+	<script>
+		document.querySelector('form').addEventListener('submit', function (event) {
+			// prevent the form from submitting normally
+			event.preventDefault();
+			// get the form data
+			const username = document.querySelector('#username').value.trim();
+			const password = document.querySelector('#password').value.trim();
+			const confirm_password = document.querySelector('#confirm_password').value.trim();
+			// validate the form data
+			let errors = '';
+			if (username.length === 0) {
+				errors += 'Please enter a username<br>';
+			}
+			if (password.length < 8) {
+				errors += 'Password must be at least 8 characters long<br>';
+			}
+			if (password !== confirm_password) {
+				errors += 'Passwords do not match<br>';
+			}
+			// display the errors or submit the form
+			if (errors.length > 0) {
+				document.querySelector('#errors').innerHTML = errors;
+			} else {
+				document.querySelector('form').submit();
+			}
+		});
+	</script>
+</body>
+
+</html>
